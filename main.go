@@ -3,10 +3,9 @@ package main
 import (
 	"log"
 
-	"github.com/nilber/go-exchange-order-book/engine"
-
 	"github.com/Shopify/sarama"
 	cluster "github.com/bsm/sarama-cluster"
+	"github.com/nilber/go-exchange-order-book/engine"
 )
 
 func main() {
@@ -70,6 +69,7 @@ func createConsumer() *cluster.Consumer {
 	}
 	go handleErrors(consumer)
 	go handleNotifications(consumer)
+	return consumer
 }
 
 func handleErrors(consumer *cluster.Consumer) {
@@ -88,7 +88,7 @@ func handleNotifications(consumer *cluster.Consumer) {
 // Create the producer
 //
 
-func createProducer() *sarama.AsyncProducer {
+func createProducer() sarama.AsyncProducer {
 	config := sarama.NewConfig()
 	config.Producer.Return.Successes = false
 	config.Producer.Return.Errors = true

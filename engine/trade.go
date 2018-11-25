@@ -9,11 +9,11 @@ type Trade struct {
 	Price        uint64 `json:"price"`
 }
 
-func (trade *Trade) FromJson(msg []byte) error {
+func (trade *Trade) FromJSON(msg []byte) error {
 	return json.Unmarshal(msg, trade)
 }
 
-func (trade *Trade) ToJson() []byte {
+func (trade *Trade) ToJSON() []byte {
 	str, _ := json.Marshal(trade)
 	return str
 }
