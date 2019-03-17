@@ -1,5 +1,9 @@
 package engine
 
+import (
+	"fmt"
+)
+
 // OrderBook type
 type OrderBook struct {
 	BuyOrders  []Order
@@ -16,9 +20,11 @@ func (book *OrderBook) addBuyOrder(order Order) {
 			break
 		}
 	}
-	if i == n-1 {
+	if i == n-1 || n == 0 {
 		book.BuyOrders = append(book.BuyOrders, order)
 	} else {
+		fmt.Println(n)
+		fmt.Println(i)
 		copy(book.BuyOrders[i+1:], book.BuyOrders[i:])
 		book.BuyOrders[i] = order
 	}
@@ -34,7 +40,7 @@ func (book *OrderBook) addSellOrder(order Order) {
 			break
 		}
 	}
-	if i == n-1 {
+	if i == n-1 || n == 0 {
 		book.SellOrders = append(book.SellOrders, order)
 	} else {
 		copy(book.SellOrders[i+1:], book.SellOrders[i:])
